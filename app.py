@@ -92,7 +92,6 @@ def home():
             </body>
         </html>
     ''')
-
 # Route to handle encryption
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
