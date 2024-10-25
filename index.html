@@ -12,16 +12,22 @@
 
     <script>
         function triggerEncryption() {
-            fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/trigger/encrypt', { method: 'POST' })
-                .then(response => alert('Encryption triggered!'))
-                .catch(error => alert('Error triggering encryption.'));
-        }
+    fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/encrypt', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message))
+    .catch(error => alert('Error triggering encryption.'));
+}
 
-        function triggerDecryption() {
-            fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/trigger/decrypt', { method: 'POST' })
-                .then(response => alert('Decryption triggered!'))
-                .catch(error => alert('Error triggering decryption.'));
-        }
+function triggerDecryption() {
+    fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/decrypt', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message))
+    .catch(error => alert('Error triggering decryption.'));
+}
     </script>
 </body>
 </html>
