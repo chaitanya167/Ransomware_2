@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt/Decrypt Target Folder</title>
+</head>
+<body>
+    <h1>File Encryption and Decryption</h1>
+    <button onclick="triggerEncryption()">Encrypt Target Folder</button>
+    <button onclick="triggerDecryption()">Decrypt Target Folder</button>
+
+    <script>
+        function triggerEncryption() {
+            fetch('https://<your-cloud-server>/trigger/encrypt', { method: 'POST' })
+                .then(response => alert('Encryption triggered!'))
+                .catch(error => alert('Error triggering encryption.'));
+        }
+
+        function triggerDecryption() {
+            fetch('https://<your-cloud-server>/trigger/decrypt', { method: 'POST' })
+                .then(response => alert('Decryption triggered!'))
+                .catch(error => alert('Error triggering decryption.'));
+        }
+    </script>
+</body>
+</html>
+
