@@ -5,7 +5,7 @@ from decrypt import decrypt_file
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 FOLDER_TO_PROCESS = "/home/sec-lab/Target Folder"
 PASSWORD = "12345"
