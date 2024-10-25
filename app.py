@@ -2,8 +2,10 @@ from flask import Flask, jsonify
 import os
 from encrypt import encrypt_file
 from decrypt import decrypt_file
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 FOLDER_TO_PROCESS = "/home/sec-lab/Target Folder"
 PASSWORD = "12345"
