@@ -12,13 +12,13 @@
 
     <script>
         function triggerEncryption() {
-            fetch('https://<your-cloud-server>/trigger/encrypt', { method: 'POST' })
+            fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/trigger/encrypt', { method: 'POST' })
                 .then(response => alert('Encryption triggered!'))
                 .catch(error => alert('Error triggering encryption.'));
         }
 
         function triggerDecryption() {
-            fetch('https://<your-cloud-server>/trigger/decrypt', { method: 'POST' })
+            fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/trigger/decrypt', { method: 'POST' })
                 .then(response => alert('Decryption triggered!'))
                 .catch(error => alert('Error triggering decryption.'));
         }
