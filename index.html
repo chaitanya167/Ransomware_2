@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encrypt/Decrypt Target Folder</title>
+    <title>File Encryption and Decryption</title>
+    <script>
+        async function triggerEncryption() {
+            try {
+                const response = await fetch('https://<azure-app-url>/encrypt', { method: 'POST' });
+                const result = await response.json();
+                alert(result.message || "Encryption triggered successfully.");
+            } catch (error) {
+                alert("Error triggering encryption.");
+            }
+        }
+
+        async function triggerDecryption() {
+            try {
+                const response = await fetch('https://<azure-app-url>/decrypt', { method: 'POST' });
+                const result = await response.json();
+                alert(result.message || "Decryption triggered successfully.");
+            } catch (error) {
+                alert("Error triggering decryption.");
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>File Encryption and Decryption</h1>
     <button onclick="triggerEncryption()">Encrypt Target Folder</button>
     <button onclick="triggerDecryption()">Decrypt Target Folder</button>
-
-    <script>
-        function triggerEncryption() {
-    fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/encrypt', {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => alert(data.message))
-    .catch(error => alert('Error triggering encryption.'));
-}
-
-function triggerDecryption() {
-    fetch('https://encrypt-decrypt-app-hrbae0c3euh8a6ax.eastus-01.azurewebsites.net/decrypt', {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => alert(data.message))
-    .catch(error => alert('Error triggering decryption.'));
-}
-    </script>
 </body>
 </html>
-
