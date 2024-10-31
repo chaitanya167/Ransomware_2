@@ -1,34 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Encryption and Decryption</title>
-    <script>
-        async function triggerEncryption() {
-            try {
-                const response = await fetch('https://<azure-app-url>/encrypt', { method: 'POST' });
-                const result = await response.json();
-                alert(result.message || "Encryption triggered successfully.");
-            } catch (error) {
-                alert("Error triggering encryption.");
-            }
-        }
-
-        async function triggerDecryption() {
-            try {
-                const response = await fetch('https://<azure-app-url>/decrypt', { method: 'POST' });
-                const result = await response.json();
-                alert(result.message || "Decryption triggered successfully.");
-            } catch (error) {
-                alert("Error triggering decryption.");
-            }
-        }
-    </script>
+  <title>File Encryption and Decryption</title>
 </head>
 <body>
-    <h1>File Encryption and Decryption</h1>
-    <button onclick="triggerEncryption()">Encrypt Target Folder</button>
-    <button onclick="triggerDecryption()">Decrypt Target Folder</button>
+  <h1>File Encryption and Decryption</h1>
+  <button onclick="triggerEncryption()">Encrypt Target Folder</button>
+  <button onclick="triggerDecryption()">Decrypt Target Folder</button>
+  <p id="response"></p>
+  
+  <script>
+    async function triggerEncryption() {
+      try {
+        const response = await fetch("https://encrypt-decrypt-app-hrbae0c3euh8a6ax.canadacentral-01.azurewebsites.net/encrypt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const data = await response.json();
+        document.getElementById("response").innerText = data.message;
+      } catch (error) {
+        document.getElementById("response").innerText = "Error triggering encryption.";
+      }
+    }
+    
+    async function triggerDecryption() {
+      try {
+        const response = await fetch("https://encrypt-decrypt-app-hrbae0c3euh8a6ax.canadacentral-01.azurewebsites.net/decrypt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        const data = await response.json();
+        document.getElementById("response").innerText = data.message;
+      } catch (error) {
+        document.getElementById("response").innerText = "Error triggering decryption.";
+      }
+    }
+  </script>
 </body>
 </html>
