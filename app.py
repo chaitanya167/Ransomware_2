@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, jsonify
 import os
 from encrypt import encrypt_file
@@ -7,28 +8,36 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Update this to point to the directory you want to target
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
 FOLDER_TO_PROCESS = "/home/sec-lab/Target Folder"
 PASSWORD = "12345"
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
     try:
-        for root, dirs, files in os.walk(FOLDER_TO_PROCESS):
+        for root, _, files in os.walk(FOLDER_TO_PROCESS):
             for file in files:
-                encrypt_file(os.path.join(root, file), PASSWORD)
+                file_path = os.path.join(root, file)
+                result = encrypt_file(file_path, PASSWORD)
+                logging.info(f"Encrypted {file_path}: {result}")
         return jsonify({"message": "Encryption completed for all files."}), 200
     except Exception as e:
+        logging.error(f"Error during encryption: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/decrypt', methods=['POST'])
 def decrypt():
     try:
-        for root, dirs, files in os.walk(FOLDER_TO_PROCESS):
+        for root, _, files in os.walk(FOLDER_TO_PROCESS):
             for file in files:
-                decrypt_file(os.path.join(root, file), PASSWORD)
+                file_path = os.path.join(root, file)
+                result = decrypt_file(file_path, PASSWORD)
+                logging.info(f"Decrypted {file_path}: {result}")
         return jsonify({"message": "Decryption completed for all files."}), 200
     except Exception as e:
+        logging.error(f"Error during decryption: {e}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
